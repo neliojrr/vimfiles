@@ -35,7 +35,7 @@ Bundle 'jgdavey/vim-turbux'
 Bundle 'ervandew/supertab'
 Bundle 'Townk/vim-autoclose'
 Bundle 'klen/python-mode'
-Bundle 'vim-scripts/YankRing.vim'
+" Bundle 'vim-scripts/YankRing.vim'
 Bundle 'int3/vim-extradite'
 " }}}
 
@@ -528,8 +528,8 @@ noremap <c-o> :NERDTreeToggle<cr>
 " }}}
 " YankRing {{{
 
-let g:yankring_manual_clipboard_check = 0
-nnoremap <c-y> :YRShow<CR>
+" let g:yankring_manual_clipboard_check = 0
+" nnoremap <c-y> :YRShow<CR>
 
 "}}}
 " CommandT {{{
@@ -545,9 +545,11 @@ map <leader>gg :topleft 25 :split Gemfile<cr>
 "}}}
 " Ctrl-P {{{
 
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cmd = 'CtrlP'
+" let g:ctrlp_map = '<leader>,'
 let g:ctrlp_dont_split = 'NERD_tree_2'
 let g:ctrlp_jump_to_buffer = 0
-" let g:ctrlp_map = '<leader>,'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 1
 let g:ctrlp_split_window = 0
