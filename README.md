@@ -37,31 +37,30 @@ You will need a compiled Vim with python and ruby support
 
 Go to your home directory:
 
-cd ~
+    cd ~
 
 Clone my vimfiles repo:
 
-
-git clone --recursive https://github.com/salvianoo/vimfiles.git
+    git clone --recursive https://github.com/salvianoo/vimfiles.git
 
 Rename the repo to .vim:
 
-mv vimfiles .vim
+    mv vimfiles .vim
 
 Link vimrc and gvimrc to your home:
 
-ln -s .vim/vimrc .vimrc
+    ln -s .vim/vimrc .vimrc
 
 Open Vim:
 
-vim
+    vim
 
 (if you use MacVim):
 
-  mvim
+    mvim
 
-  Install bundles by typing
+Install bundles by typing
+   
+   :BundleInstall
 
-  :BundleInstall
-
-  Restart vim and enjoy! :)
+Restart vim and enjoy! :)
