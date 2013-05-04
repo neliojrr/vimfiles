@@ -61,6 +61,6 @@ Open Vim:
 
 Install bundles by typing
    
-   :BundleInstall
+    :BundleInstall
 
 Restart vim and enjoy! :)
