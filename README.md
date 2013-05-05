@@ -28,8 +28,7 @@ These are my vimfiles.
 * [YankRing](https://github.com/vim-scripts/YankRing.vim)
 * [vim-extradite](https://github.com/int3/vim-extradite)
 
-VIM
-===
+#### VIM requirements
 
 You will need a compiled Vim with python and ruby support
 
@@ -47,7 +46,7 @@ Rename the repo to .vim:
 
     mv vimfiles .vim
 
-Link vimrc and gvimrc to your home:
+Link vimrc to your home:
 
     ln -s .vim/vimrc .vimrc
 
