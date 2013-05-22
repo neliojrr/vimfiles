@@ -1,7 +1,7 @@
 salvianoo's vimfiles
 ========
 
-These are my vimfiles.
+These are my vimfiles. 
 
 #### What's included
 
@@ -30,8 +30,9 @@ These are my vimfiles.
 
 #### VIM requirements
 
+You will need a compiled Vim with python and ruby support
+
     vim --version | grep -Eo "\+\ruby|\+\python"
-    ![Result of command](http://f.cl.ly/items/3S1o122z3J2f3U0L1n0u/grep_result_command.png)
 
 #### Installing (step by step)
 
@@ -60,7 +61,7 @@ Open Vim:
     mvim
 
 Install bundles by typing
-
+   
     :BundleInstall
 
 Restart vim and enjoy! :)
