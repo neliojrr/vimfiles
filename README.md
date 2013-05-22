@@ -34,6 +34,8 @@ You will need a compiled Vim with python and ruby support
 
     vim --version | grep -Eo "\+\ruby|\+\python"
 
+![Result of command](http://f.cl.ly/items/3S1o122z3J2f3U0L1n0u/grep_result_command.png)
+
 #### Installing (step by step)
 
 Go to your home directory:
