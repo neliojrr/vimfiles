@@ -30,13 +30,13 @@ Bundle 'sjl/vitality.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'Lokaltog/vim-powerline'
-" Bundle 'duff/vim-scracth'
 Bundle 'jgdavey/vim-turbux'
-Bundle 'ervandew/supertab'
+" Bundle 'ervandew/supertab'
 Bundle 'Townk/vim-autoclose'
-Bundle 'klen/python-mode'
-" Bundle 'vim-scripts/YankRing.vim'
+" Bundle 'klen/python-mode'
 Bundle 'int3/vim-extradite'
+" Bundle 'duff/vim-scracth'
+" Bundle 'vim-scripts/YankRing.vim'
 " }}}
 
 filetype plugin indent on     "required by Vundle
@@ -44,7 +44,6 @@ filetype plugin indent on     "required by Vundle
 " Thanks Pathogen, you are a good friend
 " call pathogen#runtime_append_all_bundles()
 " call pathogen#helptags()
-
 "}}}
 " Basic Options ------------------------------------------------------------ {{{
 
@@ -145,8 +144,8 @@ let maplocalleader = "\\"
 " Color scheme {{{
 
 syntax on                       " turn on syntax highlighting
-colorscheme grb256
 set background=dark
+colorscheme molokai
 
 " let g:badwolf_tabline = 2
 let g:badwolf_html_link_underline=0
@@ -589,9 +588,9 @@ nnoremap <leader><cr> :silent !/usr/local/Cellar/ctags/5.8/bin/ctags -R . tags<c
 " }}}
 " SuperTab {{{
 
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabLongestHighlight = 1
-let g:SuperTabCrMapping = 1
+" let g:SuperTabDefaultCompletionType = "<c-n>"
+" let g:SuperTabLongestHighlight = 1
+" let g:SuperTabCrMapping = 1
 
 " }}}
 " Lisp {{{
@@ -644,18 +643,18 @@ map <leader>c <c-_><c-_>
 " }}}
 " Python-Mode {{{
 
-let g:pymode_doc = 1
-let g:pymode_doc_key = '<localleader>ds'
-let g:pydoc = 'pydoc'
-let g:pymode_syntax = 1
+" let g:pymode_doc = 1
+" let g:pymode_doc_key = '<localleader>ds'
+" let g:pydoc = 'pydoc'
+" let g:pymode_syntax = 1
 " let g:pymode_syntax_all = 0
 " let g:pymode_syntax_builtin_objs = 1
 " let g:pymode_syntax_space_errors = 0
 " let g:pymode_folding = 0
 
-let g:pymode_rope = 1
-let g:pymode_rope_global_prefix = "<localleader>R"
-let g:pymode_rope_local_prefix = "<localleader>r"
+" let g:pymode_rope = 1
+" let g:pymode_rope_global_prefix = "<localleader>R"
+" let g:pymode_rope_local_prefix = "<localleader>r"
 
 " }}}
 
