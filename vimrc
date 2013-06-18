@@ -346,7 +346,7 @@ augroup ft_javascript
   au!
 
   au Filetype javascript setlocal foldmethod=marker
-  au Filetype javascript setlocal foldmarker={,}
+  " au Filetype javascript setlocal foldmarker={,}
   au Filetype javascript setlocal ts=4 sts=4 sw=4 expandtab
 
   au FileType javascript inoremap <buffer> {<cr> {}<left><cr><space><space><space><space>.<cr><esc>kA<bs>
