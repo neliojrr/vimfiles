@@ -31,12 +31,13 @@ Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'jgdavey/vim-turbux'
-" Bundle 'ervandew/supertab'
+Bundle 'cfddream/vim-mou'
 Bundle 'Townk/vim-autoclose'
-" Bundle 'klen/python-mode'
 Bundle 'int3/vim-extradite'
 " Bundle 'duff/vim-scracth'
 " Bundle 'vim-scripts/YankRing.vim'
+" Bundle 'ervandew/supertab'
+" Bundle 'klen/python-mode'
 " }}}
 
 filetype plugin indent on     "required by Vundle
@@ -64,8 +65,8 @@ set laststatus=2                " always show the status line
 set visualbell                  " stop annoying bells
 set cursorline                  " highlight cursor line
 set list
-" set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-set listchars=tab:▸\ ,extends:❯,precedes:❮
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+" set listchars=tab:▸\ ,extends:❯,precedes:❮
 set scrolloff=3
 set backspace=indent,eol,start  " backspace though everthing in insert mode
 set splitbelow
@@ -164,7 +165,7 @@ augroup END
 " Space is so much easier than :
 " noremap ; :
 
-inoremap jj <esc>
+" inoremap jj <esc>
 
 noremap vv ^vg_
 
