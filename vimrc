@@ -35,6 +35,8 @@ Bundle 'cfddream/vim-mou'
 Bundle 'Townk/vim-autoclose'
 Bundle 'int3/vim-extradite'
 Bundle 'vim-scripts/ZoomWin'
+Bundle 'lambdalisue/nose.vim'
+Bundle 'reinh/vim-makegreen'
 " Bundle 'duff/vim-scracth'
 " Bundle 'vim-scripts/YankRing.vim'
 " Bundle 'ervandew/supertab'
@@ -66,8 +68,8 @@ set laststatus=2                " always show the status line
 set visualbell                  " stop annoying bells
 set cursorline                  " highlight cursor line
 set list
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-" set listchars=tab:▸\ ,extends:❯,precedes:❮
+" set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+set listchars=tab:▸\ ,extends:❯,precedes:❮
 set scrolloff=3
 set backspace=indent,eol,start  " backspace though everthing in insert mode
 set splitbelow
@@ -147,7 +149,7 @@ let maplocalleader = "\\"
 
 syntax on                       " turn on syntax highlighting
 set background=dark
-colorscheme molokai
+colorscheme wombat256mod
 
 " let g:badwolf_tabline = 2
 let g:badwolf_html_link_underline=0
@@ -322,6 +324,7 @@ augroup ft_python
   au FileType man nnoremap <buffer> <cr> :q<cr>
 
   au Filetype python setlocal ts=4 sts=4 sw=4 expandtab
+  au BufNewFile,BufRead *.py compiler nose
 augroup END
 
 "}}}
@@ -500,7 +503,7 @@ if has("autocmd")
   " styles depending on file type
   au filetype html set omnifunc=htmlcomplete#CompleteTags
 
-  autocmd BufWritePre *.java,*.yml,*.rb,*.html,*.css,*.scss,*.erb :call <sid>StripTrailingWhitespaces()
+  autocmd BufWritePre *.py,*.yml,*.rb,*.html,*.css,*.scss,*.erb :call <sid>StripTrailingWhitespaces()
 endif
 
 "}}}
@@ -641,6 +644,12 @@ let g:Powerline_cache_enabled = 1
 
 "faster shorcut for commenting. requires tComment
 map <leader>c <c-_><c-_>
+
+" }}}
+" Makegreen {{{
+
+" nnoremap \| :call MakeGreen('')<cr>
+nnoremap \| :!nosetests
 
 " }}}
 " Python-Mode {{{
