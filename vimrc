@@ -37,6 +37,7 @@ Bundle 'int3/vim-extradite'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'lambdalisue/nose.vim'
 Bundle 'reinh/vim-makegreen'
+Bundle 'airblade/vim-gitgutter'
 " Bundle 'duff/vim-scracth'
 " Bundle 'vim-scripts/YankRing.vim'
 " Bundle 'ervandew/supertab'
@@ -666,7 +667,7 @@ nnoremap \| :!nosetests
 " let g:pymode_rope = 1
 " let g:pymode_rope_global_prefix = "<localleader>R"
 " let g:pymode_rope_local_prefix = "<localleader>r"
-
+map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 " }}}
 
 " }}}
