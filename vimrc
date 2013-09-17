@@ -38,6 +38,7 @@ Bundle 'vim-scripts/ZoomWin'
 Bundle 'lambdalisue/nose.vim'
 Bundle 'reinh/vim-makegreen'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'elixir-lang/vim-elixir'
 " Bundle 'duff/vim-scracth'
 " Bundle 'vim-scripts/YankRing.vim'
 " Bundle 'ervandew/supertab'
@@ -69,8 +70,8 @@ set laststatus=2                " always show the status line
 set visualbell                  " stop annoying bells
 set cursorline                  " highlight cursor line
 set list
-" set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-set listchars=tab:▸\ ,extends:❯,precedes:❮
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+" set listchars=tab:▸\ ,extends:❯,precedes:❮
 set scrolloff=3
 set backspace=indent,eol,start  " backspace though everthing in insert mode
 set splitbelow
@@ -150,7 +151,7 @@ let maplocalleader = "\\"
 
 syntax on                       " turn on syntax highlighting
 set background=dark
-colorscheme wombat256mod
+colorscheme Tomorrow-Night
 
 " let g:badwolf_tabline = 2
 let g:badwolf_html_link_underline=0
@@ -504,7 +505,7 @@ if has("autocmd")
   " styles depending on file type
   au filetype html set omnifunc=htmlcomplete#CompleteTags
 
-  autocmd BufWritePre *.py,*.yml,*.rb,*.html,*.css,*.scss,*.erb :call <sid>StripTrailingWhitespaces()
+  autocmd BufWritePre *.py,*.yml,*.rb,*.html,*.css,*.scss,*.erb,*.haml :call <sid>StripTrailingWhitespaces()
 endif
 
 "}}}
