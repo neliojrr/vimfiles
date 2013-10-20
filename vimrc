@@ -70,8 +70,8 @@ set laststatus=2                " always show the status line
 set visualbell                  " stop annoying bells
 set cursorline                  " highlight cursor line
 set list
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-" set listchars=tab:▸\ ,extends:❯,precedes:❮
+" set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+set listchars=tab:▸\ ,extends:❯,precedes:❮
 set scrolloff=3
 set backspace=indent,eol,start  " backspace though everthing in insert mode
 set splitbelow
@@ -151,7 +151,8 @@ let maplocalleader = "\\"
 
 syntax on                       " turn on syntax highlighting
 set background=dark
-colorscheme Tomorrow-Night
+" colorscheme Tomorrow-Night
+colorscheme smyck
 
 " let g:badwolf_tabline = 2
 let g:badwolf_html_link_underline=0
@@ -633,6 +634,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_disabled_filetypes = ['html', 'rst']
 let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
 let g:syntastic_sjl_conf = '$HOME/.vim/jsl.conf'
+let g:syntastic_ruby_exec = '~/.rbenv/versions/2.0.0-p195/bin/ruby'
 
 "}}}
 " Powerline {{{
@@ -764,7 +766,10 @@ if has('gui_running')
   " GUI Vim
 
   " set guifont=Menlo\ Regular\ for\ Powerline:h12
-  set guifont=Monaco:h12
+  " set guifont=Monaco:h12
+  set guifont=Ubuntu\ Mono:h16
+
+  colorscheme Tomorrow-Night
   " set guifont=Inconsolata-dz\ for\ Powerline:h12
 
   " Remove all the UI cruft
