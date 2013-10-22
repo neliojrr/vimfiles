@@ -22,6 +22,8 @@ Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-repeat'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'sjl/tslime.vim'
@@ -189,7 +191,7 @@ noremap <leader>s :%s//<left>
 nnoremap <leader><space> :nohls<cr>
 
 " Map hashrocket as textmate
-" imap <c-l> <space>=><space>
+imap <c-l> <space>=><space>
 
 "I like that
 nnoremap <localleader>= ==
