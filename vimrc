@@ -12,7 +12,7 @@ set nocompatible                " no legacy vi
 filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
- 
+
 " My bundles (github) ------------------------------------------------------ {{{
 Bundle 'tomtom/tcomment_vim'
 Bundle 'kien/ctrlp.vim'
@@ -49,9 +49,6 @@ Bundle 'elixir-lang/vim-elixir'
 
 filetype plugin indent on     "required by Vundle
 
-" Thanks Pathogen, you are a good friend
-" call pathogen#runtime_append_all_bundles()
-" call pathogen#helptags()
 "}}}
 " Basic Options ------------------------------------------------------------ {{{
 
@@ -153,8 +150,8 @@ let maplocalleader = "\\"
 
 syntax on                       " turn on syntax highlighting
 set background=dark
-" colorscheme Tomorrow-Night
-colorscheme smyck
+colorscheme Tomorrow-Night
+" colorscheme smyck
 
 " let g:badwolf_tabline = 2
 let g:badwolf_html_link_underline=0
@@ -191,7 +188,8 @@ noremap <leader>s :%s//<left>
 nnoremap <leader><space> :nohls<cr>
 
 " Map hashrocket as textmate
-imap <c-l> <space>=><space>
+" imap <c-l> <space>=><space>
+vnoremap <c-l> :!python
 
 "I like that
 nnoremap <localleader>= ==
@@ -636,7 +634,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_disabled_filetypes = ['html', 'rst']
 let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
 let g:syntastic_sjl_conf = '$HOME/.vim/jsl.conf'
-let g:syntastic_ruby_exec = '~/.rbenv/versions/2.0.0-p195/bin/ruby'
+let g:syntastic_ruby_exec = '~/.rbenv/versions/2.0.0-p247/bin/ruby'
 
 "}}}
 " Powerline {{{
@@ -772,6 +770,7 @@ if has('gui_running')
   set guifont=Ubuntu\ Mono:h16
 
   colorscheme Tomorrow-Night
+  " colorscheme molokai
   " set guifont=Inconsolata-dz\ for\ Powerline:h12
 
   " Remove all the UI cruft
@@ -784,8 +783,8 @@ if has('gui_running')
 
   if has("gui_macvim")
 
-    set fuoptions=maxvert,maxhorz
-    set fullscreen
+    " set fuoptions=maxvert,maxhorz
+    " set fullscreen
   else
     " Non-MacVim GUI, like Gvim
   end
