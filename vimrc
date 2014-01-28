@@ -69,7 +69,7 @@ set showcmd                     " show current mode down the bottom
 set autoindent                  " automatic indent new lines
 set smartindent                 " be smart about it
 set nofoldenable
-set shell=/bin/bash
+set shell=/bin/zsh
 set laststatus=2                " always show the status line
 set visualbell                  " stop annoying bells
 set cursorline                  " highlight cursor line
@@ -141,7 +141,7 @@ set expandtab                   " use spaces, not tabs
 set nowrap                      " do not wrap lines
 set textwidth=80
 set formatoptions=qrn1
-set colorcolumn=+1             " this will highlight column 80
+set colorcolumn=+1              " this will highlight column 80
 
 " }}}
 " Leader {{{
@@ -307,16 +307,24 @@ set foldtext=MyFoldText() " }}}
 " Filetype-specific -------------------------------------------------------- {{{
 
 " Ruby {{{
-
 augroup ft_ruby
   au!
   au Filetype ruby setlocal ts=2 sts=2 sw=2 expandtab
   " au FileType ruby setlocal imap <c-l> <space>=><space>
 augroup END
+" }}}
+" Javascript {{{
+augroup ft_javascript
+  au!
 
+  au Filetype javascript setlocal foldmethod=marker
+  " au Filetype javascript setlocal foldmarker={,}
+  au Filetype javascript setlocal ts=4 sts=4 sw=4 expandtab
+
+  au FileType javascript inoremap <buffer> {<cr> {}<left><cr><space><space><space><space>.<cr><esc>kA<bs>
+augroup END
 " }}}
 " Python {{{
-
 augroup ft_python
   au!
 
@@ -326,15 +334,7 @@ augroup ft_python
   au Filetype python setlocal ts=4 sts=4 sw=4 expandtab
   au BufNewFile,BufRead *.py compiler nose
 augroup END
-
 "}}}
-" PHP {{{
-augroup ft_php
-  au!
-
-  au FileType php setlocal imap <c-l> <space>-><space>
-
-  " }}}
 " Django {{{
 
 augroup ft_django
@@ -345,19 +345,6 @@ augroup ft_django
 augroup END
 
 "}}}
-" Javascript {{{
-
-augroup ft_javascript
-  au!
-
-  au Filetype javascript setlocal foldmethod=marker
-  " au Filetype javascript setlocal foldmarker={,}
-  au Filetype javascript setlocal ts=4 sts=4 sw=4 expandtab
-
-  au FileType javascript inoremap <buffer> {<cr> {}<left><cr><space><space><space><space>.<cr><esc>kA<bs>
-augroup END
-
-" }}}
 " CSS, SCSS and Less {{{
 
 augroup ft_css
@@ -403,49 +390,38 @@ augroup END
 
 " }}}
 " Lisp {{{
-
 augroup ft_lisp
   au!
   au FileType lisp call TurnOnLispFolding()
 augroup END
-
 " }}}
 " C {{{
-
 augroup ft_c
   au Filetype c setlocal ts=4 sts=4 sw=4 expandtab
   au Filetype c setlocal foldmethod=marker
   au Filetype c setlocal foldmarker={,}
 augroup END
-
 " }}}
 " C++ {{{
-
 augroup ft_cpp
   au Filetype cpp setlocal ts=4 sts=4 sw=4 expandtab
   au Filetype cpp setlocal foldmethod=marker
   au Filetype cpp setlocal foldmarker={,}
 augroup END
-
 " }}}
 " Guard {{{
-
 augroup ft_guard
   au!
   au BufRead,BufNewFile Guardfile set ft=ruby
 augroup END
-
 " }}}
 " Vagrant {{{
-
 augroup ft_vagrant
   au!
   au BufRead,BufNewFile Vagrantfile set ft=ruby
 augroup END
-
 " }}}
 " Puppet {{{
-
 augroup ft_puppet
   au!
 
@@ -453,10 +429,8 @@ augroup ft_puppet
   au FileType puppet setlocal foldmarker={,}
   au Filetype puppet setlocal ts=4 sts=4 sw=4 expandtab
 augroup END
-
 " }}}
 " Nginx {{{
-
 augroup ft_nginx
   au!
 
@@ -464,10 +438,8 @@ augroup ft_nginx
   au FileType nginx setlocal foldmarker={,}
   au Filetype nginx setlocal ts=4 sts=4 sw=4 expandtab
 augroup END
-
 " }}}
 " Vim {{{
-
 augroup ft_vim
   au!
 
@@ -475,7 +447,6 @@ augroup ft_vim
   au FileType help setlocal textwidth=78
   au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
-
 " }}}
 " Treetop-files {{{
 
@@ -606,10 +577,6 @@ map <leader>c <c-_><c-_>
 nnoremap \| :!nosetests
 
 " }}}
-
-" }}}
-" Mini-plugins ------------------------------------------------------------- {{{
-
 " StripTrailingWhitespaces {{{
 
 nnoremap <leader>W :call <sid>StripTrailingWhitespaces()<cr>
@@ -629,10 +596,16 @@ endfunction
 "}}}
 
 " }}}
+" Mini-plugins ------------------------------------------------------------- {{{
+
+" }}}
 " Environments (GUI/Console) ----------------------------------------------- {{{
 
 if has('gui_running')
   " GUI Vim
+
+  " Airline
+  let g:airline_powerline_fonts = 1
 
   " Remove all the UI cruft
   " go is same of guioptions
@@ -641,9 +614,6 @@ if has('gui_running')
   set go-=L
   set go-=r
   set go-=R
-
-  " Airline
-  let g:airline_powerline_fonts = 1
 
   if has("gui_macvim")
 
