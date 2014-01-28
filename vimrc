@@ -13,34 +13,39 @@ filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
-" My bundles (github) ------------------------------------------------------ {{{
-Bundle 'tomtom/tcomment_vim'
+" My Bundles (Github) ------------------------------------------------------ {{{
 Bundle 'kien/ctrlp.vim'
+Bundle 'bling/vim-airline'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-fugitive'
+Bundle 'scrooloose/syntastic'
+Bundle 'sjl/gundo.vim'
+
+Bundle 'airblade/vim-gitgutter'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'sjl/vitality.vim'
+Bundle 'sjl/tslime.vim'
+
+Bundle 'mileszs/ack.vim'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-ragtag'
-Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-repeat'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'sjl/tslime.vim'
-Bundle 'sjl/gundo.vim'
-Bundle 'sjl/vitality.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'msanders/snipmate.vim'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'jgdavey/vim-turbux'
-Bundle 'cfddream/vim-mou'
-Bundle 'Townk/vim-autoclose'
-Bundle 'int3/vim-extradite'
-Bundle 'vim-scripts/ZoomWin'
+
 Bundle 'lambdalisue/nose.vim'
 Bundle 'reinh/vim-makegreen'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'elixir-lang/vim-elixir'
+
+Bundle 'int3/vim-extradite'
+" Bundle 'Lokaltog/vim-powerline'
+" Bundle 'tpope/vim-markdown'
+" Bundle 'jgdavey/vim-turbux'
+" Bundle 'cfddream/vim-mou'
+" Bundle 'Townk/vim-autoclose'
+" Bundle 'elixir-lang/vim-elixir'
+" Bundle 'vim-scripts/ZoomWin'
+" Bundle 'tpope/vim-unimpaired'
+" Bundle 'msanders/snipmate.vim'
 " Bundle 'duff/vim-scracth'
 " Bundle 'vim-scripts/YankRing.vim'
 " Bundle 'ervandew/supertab'
@@ -150,11 +155,8 @@ let maplocalleader = "\\"
 
 syntax on                       " turn on syntax highlighting
 set background=dark
+set guifont=Ubuntu\ Mono\ derivative\ Powerline:h16
 colorscheme Tomorrow-Night
-" colorscheme smyck
-
-" let g:badwolf_tabline = 2
-let g:badwolf_html_link_underline=0
 
 " Reload the colorscheme whenever we write the file
 augroup color_colonoscopy_dev
@@ -220,9 +222,6 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
-"shortuct for editing vimrc file in a new
-" nmap ,ev :tabedit ~/.vim/vimrc<cr>
-
 " Send visual selection to gist.github.com as a private, filetyped Gist
 " Requires the gist command line too (brew install gist)
 vnoremap <leader>G :w !gist -t %:e \| pbcopy<cr>
@@ -231,11 +230,9 @@ vnoremap <leader>UG :w !gist -p \| pbcopy<cr>
 " }}}
 " Quick Editing ------------------------------------------------------------ {{{
 
-noremap <leader>ef :vsplit ~/.config/fish/config.fish<cr>
 noremap <leader>ev <C-w>v<C-w>j:e ~/.vim/vimrc<cr>
-noremap <leader>ep <C-w>v<C-w>j:e ~/.pentadactylrc<cr>
 noremap <leader>et <C-w>v<C-w>j:e ~/.tmux.conf<cr>
-noremap <leader>eb <C-w>v<C-w>j:e ~/.bashrc<cr>
+noremap <leader>eb <C-w>v<C-w>j:e ~/.zshrc<cr>
 
 " }}}
 " Searching and movement --------------------------------------------------- {{{
@@ -271,7 +268,7 @@ nnoremap <leader><leader> <c-^>
 
 " Easily move to start/end of line:
 " noremap <c-a> ^
-" noremap <c-e> g_
+noremap <c-e> g_
 
 "}}}
 " Folding -------------------------------------------------------------------{{{
@@ -405,17 +402,6 @@ augroup ft_css
 augroup END
 
 " }}}
-" Java {{{
-
-augroup ft_java
-  " au Filetype java setlocal ts=4 sts=4 sw=4 expandtab omnifunc=javacomplete#Complete
-  au Filetype java setlocal ts=4 sts=4 sw=4 expandtab
-  au Filetype java setlocal foldmethod=marker
-  au Filetype java setlocal foldmarker={,}
-  au Filetype java setlocal foldlevel=0
-augroup END
-
-" }}}
 " Lisp {{{
 
 augroup ft_lisp
@@ -533,23 +519,6 @@ au FileType nerdtree setlocal nolist
 noremap <c-o> :NERDTreeToggle<cr>
 
 " }}}
-" YankRing {{{
-
-" let g:yankring_manual_clipboard_check = 0
-" nnoremap <c-y> :YRShow<CR>
-
-"}}}
-" CommandT {{{
-
-" map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-" map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
-" map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>gg :topleft 25 :split Gemfile<cr>
-
-" let g:CommandTMaxHeight=12
-" let g:CommandTMatchWindowAtTop=1
-
-"}}}
 " Ctrl-P {{{
 
 " let g:ctrlp_map = '<c-p>'
@@ -594,24 +563,9 @@ nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader><cr> :silent !/usr/local/Cellar/ctags/5.8/bin/ctags -R . tags<cr>:redraw!<cr>
 
 " }}}
-" SuperTab {{{
-
-" let g:SuperTabDefaultCompletionType = "<c-n>"
-" let g:SuperTabLongestHighlight = 1
-" let g:SuperTabCrMapping = 1
-
-" }}}
-" Lisp {{{
-
-let g:lisp_rainbow = 1
-let g:scheme_rainbow = 1
-
-" }}}
 " Fugitive {{{
 
-" noremap <leader>gd :Gdiff<cr>
 noremap <leader>gs :Gstatus<cr>
-" noremap <leader>gb :Gblame<cr>
 
 augroup ft_fugitive
   au!
@@ -634,43 +588,23 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_disabled_filetypes = ['html', 'rst']
 let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
 let g:syntastic_sjl_conf = '$HOME/.vim/jsl.conf'
-let g:syntastic_ruby_exec = '~/.rbenv/versions/2.0.0-p247/bin/ruby'
+let g:syntastic_ruby_exec = '~/.rbenv/versions/2.0.0-p353/bin/ruby'
 
 "}}}
-" Powerline {{{
+" Airline {{{
 
-" let g:Powerline_symbols = 'fancy'
-let g:Powerline_cache_enabled = 1
-" let g:Powerline_colorscheme = 'badwolf'
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
 
 " }}}
 " tComment {{{
-
-"faster shorcut for commenting. requires tComment
 map <leader>c <c-_><c-_>
-
 " }}}
 " Makegreen {{{
 
 " nnoremap \| :call MakeGreen('')<cr>
 nnoremap \| :!nosetests
 
-" }}}
-" Python-Mode {{{
-
-" let g:pymode_doc = 1
-" let g:pymode_doc_key = '<localleader>ds'
-" let g:pydoc = 'pydoc'
-" let g:pymode_syntax = 1
-" let g:pymode_syntax_all = 0
-" let g:pymode_syntax_builtin_objs = 1
-" let g:pymode_syntax_space_errors = 0
-" let g:pymode_folding = 0
-
-" let g:pymode_rope = 1
-" let g:pymode_rope_global_prefix = "<localleader>R"
-" let g:pymode_rope_local_prefix = "<localleader>r"
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 " }}}
 
 " }}}
@@ -693,85 +627,12 @@ function! <sid>StripTrailingWhitespaces()
 endfunction
 
 "}}}
-" Error Toggles {{{
-
-command! ErrorsToggle call ErrorsToggle()
-nmap <silent> <f3> :ErrorsToggle<cr>
-
-function! ErrorsToggle() " {{{
-  if exists("w:is_error_window")
-    unlet w:is_error_window
-    exec "q"
-  else
-    exec "Errors"
-    lopen
-    let w:is_error_window = 1
-  endif
-endfunction " }}}
-
-" }}}
-" Font-Size Toggle {{{
-
-function! <sid>FontSizeToggle()
-  if &guifont == "Inconsolata-dz for Powerline:h12"
-    set guifont=Inconsolata-dz\ for\ Powerline:h16
-  else
-    set guifont=Inconsolata-dz\ for\ Powerline:h12
-  endif
-endfunction
-
-nnoremap <leader>B :call <sid>FontSizeToggle()<cr>
-
-"}}}
-" Background Toggle {{{
-
-function! <sid>BackgroundToggle()
-  if &background == "dark"
-    set background=light
-  else
-    set background=dark
-  endif
-endfunction
-" nnoremap <leader>B :call <sid>BackgroundToggle()<cr>
-
-"}}}
-" ShowRoutes Rails {{{
-
-" thanks @garybernhardt
-map <leader>gR :call ShowRoutes()<cr>
-
-function! ShowRoutes()
-  " Requires 'scratch plugin
-  :topleft 50 :split __Routes__
-  " Make sure Vim doesn't write __Routes__ as a file
-  :set buftype=nofile
-  " Delete everything
-  :normal 1GdG
-  " Put routes output in buffer
-  :0r! rake -s routes
-  " Size window to number of lines (1 plus rake output length)
-  :exec ":normal " . line("$") . "_ "
-  " Move cursor to bottom
-  :normal 1GG
-  " Delete empty trailing line
-  :normal dd
-endfunction
-
-" }}}
 
 " }}}
 " Environments (GUI/Console) ----------------------------------------------- {{{
 
 if has('gui_running')
   " GUI Vim
-
-  " set guifont=Menlo\ Regular\ for\ Powerline:h12
-  " set guifont=Monaco:h12
-  set guifont=Ubuntu\ Mono:h16
-
-  colorscheme Tomorrow-Night
-  " colorscheme molokai
-  " set guifont=Inconsolata-dz\ for\ Powerline:h12
 
   " Remove all the UI cruft
   " go is same of guioptions
@@ -780,6 +641,9 @@ if has('gui_running')
   set go-=L
   set go-=r
   set go-=R
+
+  " Airline
+  let g:airline_powerline_fonts = 1
 
   if has("gui_macvim")
 
