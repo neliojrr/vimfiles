@@ -13,50 +13,49 @@ filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
-" My Bundles (Github) ------------------------------------------------------ {{{
 Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
+Bundle 'scrooloose/syntastic'
+Bundle 'tomtom/tcomment_vim'
+
+Bundle 'mattn/emmet-vim'
+Bundle 'othree/html5.vim'
+Bundle 'msanders/snipmate.vim'
+
+Bundle 'Raimondi/delimitMate'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/syntastic'
-Bundle 'sjl/gundo.vim'
-
-Bundle 'airblade/vim-gitgutter'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'sjl/vitality.vim'
-Bundle 'sjl/tslime.vim'
-
-Bundle 'mileszs/ack.vim'
 Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-ragtag'
-Bundle 'tpope/vim-surround'
 
-Bundle 'lambdalisue/nose.vim'
-Bundle 'reinh/vim-makegreen'
+Bundle 'sjl/vitality.vim'
+Bundle 'sjl/tslime.vim'
+Bundle 'mileszs/ack.vim'
 
 Bundle 'int3/vim-extradite'
-" Bundle 'Lokaltog/vim-powerline'
-" Bundle 'tpope/vim-markdown'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'Go-Syntax'
+Bundle 'rizzatti/dash.vim'
+
+" Bundle 'lambdalisue/nose.vim'
+" Bundle 'reinh/vim-makegreen'
+" Bundle 'sjl/gundo.vim'
+" Bundle 'airblade/vim-gitgutter'
 " Bundle 'jgdavey/vim-turbux'
-" Bundle 'cfddream/vim-mou'
-" Bundle 'Townk/vim-autoclose'
-" Bundle 'elixir-lang/vim-elixir'
-" Bundle 'vim-scripts/ZoomWin'
-" Bundle 'tpope/vim-unimpaired'
-" Bundle 'msanders/snipmate.vim'
-" Bundle 'duff/vim-scracth'
-" Bundle 'vim-scripts/YankRing.vim'
-" Bundle 'ervandew/supertab'
-" Bundle 'klen/python-mode'
-" }}}
+
+" // Clojure specific bundles
+" Bundle 'guns/vim-clojure-static'
+" Bundle 'tpope/vim-fireplace'
+" Bundle 'tpope/vim-classpath'
+
+" Bundle 'scrooloose/nerdtree'
 
 filetype plugin indent on     "required by Vundle
 
 "}}}
 " Basic Options ------------------------------------------------------------ {{{
-
 set encoding=utf-8
 set noswapfile
 set modelines=0                 " security fix
@@ -80,7 +79,7 @@ set scrolloff=3
 set backspace=indent,eol,start  " backspace though everthing in insert mode
 set splitbelow
 
-" Basically this makes terminal Vim work sanely
+" Makes terminal Vim work sanely
 set notimeout
 set ttimeout
 set ttimeoutlen=50
@@ -110,6 +109,8 @@ set wildignore+=.git                              " Version control
 set wildignore+=*.aux,*.out,*.toc                 " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg    " binary images "
 set wildignore+=*.DS_Store                        " OSX bullshit
+set wildignore+=node_modules
+set wildignore+=bower_components
 
 set wildignore+=*.pyc                             " Python bytecode
 
@@ -153,10 +154,10 @@ let maplocalleader = "\\"
 " }}}
 " Color scheme {{{
 
-syntax on                       " turn on syntax highlighting
+syntax on
 set background=dark
-set guifont=Ubuntu\ Mono\ derivative\ Powerline:h16
-colorscheme Tomorrow-Night
+" set guifont=Ubuntu\ Mono\ derivative\ Powerline:h16
+set guifont=Meslo\ LG\ M\ for\ Powerline:h16
 
 " Reload the colorscheme whenever we write the file
 augroup color_colonoscopy_dev
@@ -274,10 +275,7 @@ noremap <c-e> g_
 " Folding -------------------------------------------------------------------{{{
 
 set foldlevelstart=0
-
 set foldmethod=marker
-" set foldnestmax=3
-" set foldlevelstart=0
 
 " Space to toggle folds
 nnoremap <Space> za
@@ -306,6 +304,11 @@ set foldtext=MyFoldText() " }}}
 " }}}
 " Filetype-specific -------------------------------------------------------- {{{
 
+" Golang {{{
+augroup ft_go
+  set ft=go
+augroup END
+" }}}
 " Ruby {{{
 augroup ft_ruby
   au!
@@ -318,8 +321,7 @@ augroup ft_javascript
   au!
 
   au Filetype javascript setlocal foldmethod=marker
-  " au Filetype javascript setlocal foldmarker={,}
-  au Filetype javascript setlocal ts=4 sts=4 sw=4 expandtab
+  au Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
 
   au FileType javascript inoremap <buffer> {<cr> {}<left><cr><space><space><space><space>.<cr><esc>kA<bs>
 augroup END
@@ -402,6 +404,11 @@ augroup ft_c
   au Filetype c setlocal foldmarker={,}
 augroup END
 " }}}
+" Java {{{
+augroup ft_java
+  au Filetype java setlocal ts=2 sts=2 sw=2 expandtab
+augroup END
+" }}}
 " C++ {{{
 augroup ft_cpp
   au Filetype cpp setlocal ts=4 sts=4 sw=4 expandtab
@@ -463,7 +470,7 @@ if has("autocmd")
   " styles depending on file type
   au filetype html set omnifunc=htmlcomplete#CompleteTags
 
-  autocmd BufWritePre *.py,*.yml,*.rb,*.html,*.css,*.scss,*.erb,*.haml :call <sid>StripTrailingWhitespaces()
+  autocmd BufWritePre *.js,*.py,*.yml,*.rb,*.html,*.css,*.scss,*.erb,*.haml :call <sid>StripTrailingWhitespaces()
 endif
 
 "}}}
@@ -476,18 +483,24 @@ endif
 noremap <leader>a :Ack
 
 "}}}
+" Emmet {{{
+
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+" }}}
 " NERDTree {{{
 
-let NERDTreeHighlightCursorline=1
-let NERDTreeIgnore = ['.*\pyc$', '.*\jpg$', '.*\pdf$']
-
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let NERDChristmasTree = 1
-let NERDTreeChDirMode = 2
-
-au FileType nerdtree setlocal nolist
-noremap <c-o> :NERDTreeToggle<cr>
+" let NERDTreeHighlightCursorline=1
+" let NERDTreeIgnore = ['bower_components', 'node_modules', '.*\pyc$', '.*\jpg$', '.*\pdf$']
+"
+" let NERDTreeMinimalUI = 1
+" let NERDTreeDirArrows = 1
+" let NERDChristmasTree = 1
+" let NERDTreeChDirMode = 2
+"
+" au FileType nerdtree setlocal nolist
+" noremap <c-o> :NERDTreeToggle<cr>
 
 " }}}
 " Ctrl-P {{{
@@ -495,14 +508,16 @@ noremap <c-o> :NERDTreeToggle<cr>
 " let g:ctrlp_map = '<c-p>'
 " let g:ctrlp_cmd = 'CtrlP'
 " let g:ctrlp_map = '<leader>,'
+noremap <c-o> :CtrlPBuffer<cr>
+
 let g:ctrlp_dont_split = 'NERD_tree_2'
 let g:ctrlp_jump_to_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 1
 let g:ctrlp_split_window = 0
 let g:ctrlp_max_height = 20
-let g:ctrlp_extensions = ['tag']
-
+" let g:ctrlp_extensions = ['tag']
+"
 let g:ctrlp_prompt_mappings = {
       \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
       \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
@@ -511,23 +526,23 @@ let g:ctrlp_prompt_mappings = {
       \ 'ToggleFocus()':        ['<c-tab>'],
       \ }
 
-let ctrlp_filter_greps = "" .
-      \ "egrep -iv '\\.(" .
-      \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
-      \ ")$' | " .
-      \ "egrep -v '^(\\./)?(" .
-      \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/" .
-      \ ")'"
-
-let my_ctrlp_user_command = "" .
-      \ "find %s '(' -type f ')' -maxdepth 15 -not -path '*/\\.*/*' | " .
-      \ ctrlp_filter_greps
-
-let my_ctrlp_git_command = "" .
-      \ "cd %s && git ls-files | " .
-      \ ctrlp_filter_greps
-
-let g:ctrlp_user_command = ['.git/', my_ctrlp_git_command, my_ctrlp_user_command]
+" let ctrlp_filter_greps = "" .
+"       \ "egrep -iv '\\.(" .
+"       \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
+"       \ ")$' | " .
+"       \ "egrep -v '^(\\./)?(" .
+"       \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/" .
+"       \ ")'"
+"
+" let my_ctrlp_user_command = "" .
+"       \ "find %s '(' -type f ')' -maxdepth 15 -not -path '*/\\.*/*' | " .
+"       \ ctrlp_filter_greps
+"
+" let my_ctrlp_git_command = "" .
+"       \ "cd %s && git ls-files | " .
+"       \ ctrlp_filter_greps
+"
+" let g:ctrlp_user_command = ['.git/', my_ctrlp_git_command, my_ctrlp_user_command]
 
 nnoremap <leader>. :CtrlPTag<cr>
 " Alterar path do ctags com homebrew
@@ -559,22 +574,18 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_disabled_filetypes = ['html', 'rst']
 let g:syntastic_stl_format = '[%E{%e Errors}%B{, }%W{%w Warnings}]'
 let g:syntastic_sjl_conf = '$HOME/.vim/jsl.conf'
-let g:syntastic_ruby_exec = '~/.rbenv/versions/2.0.0-p353/bin/ruby'
+let g:syntastic_ruby_exec = '~/.rbenv/versions/2.1.0/bin/ruby'
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+" let g:syntastic_java_javac_classpath = "/Users/salvianoo/Desktop/java-proj/build/classes/main/hello"
 
 "}}}
-" Airline {{{
-
-" let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#enabled = 1
-
-" }}}
 " tComment {{{
 map <leader>c <c-_><c-_>
 " }}}
 " Makegreen {{{
 
 " nnoremap \| :call MakeGreen('')<cr>
-nnoremap \| :!nosetests
+" nnoremap \| :!nosetests
 
 " }}}
 " StripTrailingWhitespaces {{{
@@ -592,20 +603,17 @@ function! <sid>StripTrailingWhitespaces()
   let @/=_s
   call cursor(l, c)
 endfunction
-
 "}}}
-
-" }}}
-" Mini-plugins ------------------------------------------------------------- {{{
 
 " }}}
 " Environments (GUI/Console) ----------------------------------------------- {{{
 
 if has('gui_running')
-  " GUI Vim
-
+  colorscheme Dracula
   " Airline
   let g:airline_powerline_fonts = 1
+  let g:airline_theme = 'tomorrow'
+  " let g:airline#extensions#tabline#enabled = 1
 
   " Remove all the UI cruft
   " go is same of guioptions
@@ -615,19 +623,11 @@ if has('gui_running')
   set go-=r
   set go-=R
 
-  if has("gui_macvim")
+  " set fuoptions=maxvert,maxhorz
+  " set fullscreen
 
-    " set fuoptions=maxvert,maxhorz
-    " set fullscreen
-  else
-    " Non-MacVim GUI, like Gvim
-  end
-else
-  " Console Vim
-  " For me, this means iTerm2, possibly through tmux
-
-  " Mouse support
-  set mouse=a
+else " console vim
+  set mouse=a " mouse support
   set t_Co=256
 endif
 
