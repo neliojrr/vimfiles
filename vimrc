@@ -16,15 +16,16 @@ call vundle#rc()
 Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-fugitive'
 Bundle 'tomtom/tcomment_vim'
 
+Bundle 'msanders/snipmate.vim'
 Bundle 'mattn/emmet-vim'
 Bundle 'othree/html5.vim'
-Bundle 'msanders/snipmate.vim'
+Bundle 'kchmck/vim-coffee-script'
 
 Bundle 'Raimondi/delimitMate'
 Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-rails'
@@ -32,25 +33,18 @@ Bundle 'tpope/vim-ragtag'
 
 Bundle 'sjl/vitality.vim'
 Bundle 'sjl/tslime.vim'
+Bundle 'edkolev/tmuxline.vim'
 Bundle 'mileszs/ack.vim'
 
 Bundle 'int3/vim-extradite'
 Bundle 'digitaltoad/vim-jade'
+Bundle 'slim-template/vim-slim.git'
 Bundle 'Go-Syntax'
-Bundle 'rizzatti/dash.vim'
-
-" Bundle 'lambdalisue/nose.vim'
-" Bundle 'reinh/vim-makegreen'
-" Bundle 'sjl/gundo.vim'
-" Bundle 'airblade/vim-gitgutter'
-" Bundle 'jgdavey/vim-turbux'
 
 " // Clojure specific bundles
 " Bundle 'guns/vim-clojure-static'
 " Bundle 'tpope/vim-fireplace'
 " Bundle 'tpope/vim-classpath'
-
-" Bundle 'scrooloose/nerdtree'
 
 filetype plugin indent on     "required by Vundle
 
@@ -111,6 +105,7 @@ set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg    " binary images "
 set wildignore+=*.DS_Store                        " OSX bullshit
 set wildignore+=node_modules
 set wildignore+=bower_components
+set wildignore+=*/tmp/*
 
 set wildignore+=*.pyc                             " Python bytecode
 
@@ -283,7 +278,7 @@ vnoremap <Space> za
 
 nnoremap zO zCzO
 
-function! MyFoldText() " {{{
+function! MyFoldText()
     let line = getline(v:foldstart)
 
     let nucolwidth = &fdc + &number * &numberwidth
@@ -299,7 +294,7 @@ function! MyFoldText() " {{{
     let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
     return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . "…" . ' '
 endfunction
-set foldtext=MyFoldText() " }}}
+set foldtext=MyFoldText()
 
 " }}}
 " Filetype-specific -------------------------------------------------------- {{{
@@ -559,7 +554,7 @@ augroup ft_fugitive
 augroup END
 
 " }}}
-" tSlime plugin {{{
+" tSlime {{{
 
 let g:tslime_ensure_trailing_newlines = 1
 let g:tslime_normal_mapping = '<localleader>t'
@@ -582,12 +577,6 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 " tComment {{{
 map <leader>c <c-_><c-_>
 " }}}
-" Makegreen {{{
-
-" nnoremap \| :call MakeGreen('')<cr>
-" nnoremap \| :!nosetests
-
-" }}}
 " StripTrailingWhitespaces {{{
 
 nnoremap <leader>W :call <sid>StripTrailingWhitespaces()<cr>
@@ -609,11 +598,10 @@ endfunction
 " Environments (GUI/Console) ----------------------------------------------- {{{
 
 if has('gui_running')
-  colorscheme Dracula
+  colorscheme solarized
   " Airline
   let g:airline_powerline_fonts = 1
-  let g:airline_theme = 'tomorrow'
-  " let g:airline#extensions#tabline#enabled = 1
+  let g:airline_theme = 'solarized'
 
   " Remove all the UI cruft
   " go is same of guioptions
@@ -627,6 +615,10 @@ if has('gui_running')
   " set fullscreen
 
 else " console vim
+  colorscheme solarized
+  let g:airline_theme = 'solarized'
+  let g:tmuxline_powerline_separators = 0
+
   set mouse=a " mouse support
   set t_Co=256
 endif
