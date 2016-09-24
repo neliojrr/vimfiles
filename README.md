@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 salvianoo's vimfiles
 ========
 
@@ -67,3 +68,7 @@ Install bundles by typing
     :BundleInstall
 
 Restart vim and enjoy! :)
+=======
+# vimfiles
+My vim files
+>>>>>>> eac4ed5dc49f7462fd60079c442876d6e2954204
