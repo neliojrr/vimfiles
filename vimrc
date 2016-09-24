@@ -13,6 +13,8 @@ filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
+Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'scrooloose/syntastic'
@@ -77,6 +79,21 @@ set splitbelow
 set notimeout
 set ttimeout
 set ttimeoutlen=50
+
+" Set mvim screen size
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window (for an alternative on Windows, see simalt below).
+  set lines=999 columns=999
+else
+  " This is console Vim.
+  if exists("+lines")
+    set lines=50
+  endif
+  if exists("+columns")
+    set columns=100
+  endif
+endif
 
 " Better Completion
 set completeopt=menu,preview,longest
@@ -143,7 +160,7 @@ set colorcolumn=+1              " this will highlight column 80
 " Leader {{{
 
 " Use comma as <leader> key instead of backslash
-let mapleader = ","
+let mapleader = "\\"
 let maplocalleader = "\\"
 
 " }}}
@@ -152,7 +169,8 @@ let maplocalleader = "\\"
 syntax on
 set background=dark
 " set guifont=Ubuntu\ Mono\ derivative\ Powerline:h16
-set guifont=Meslo\ LG\ M\ for\ Powerline:h16
+" set guifont=Meslo\ LG\ M\ for\ Powerline:h28
+set guifont=Monaco:h16
 
 " Reload the colorscheme whenever we write the file
 augroup color_colonoscopy_dev
@@ -213,10 +231,10 @@ map <leader>ew :e %%
 cnoremap %% <c-r>=expand('%:h').'/'<cr>
 
 " Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
+" nnoremap <Left> :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up> :echoe "Use k"<CR>
+" nnoremap <Down> :echoe "Use j"<CR>
 
 " Send visual selection to gist.github.com as a private, filetyped Gist
 " Requires the gist command line too (brew install gist)
@@ -495,7 +513,7 @@ autocmd FileType html,css EmmetInstall
 " let NERDTreeChDirMode = 2
 "
 " au FileType nerdtree setlocal nolist
-" noremap <c-o> :NERDTreeToggle<cr>
+map <leader>p :NERDTreeToggle<cr>
 
 " }}}
 " Ctrl-P {{{
@@ -626,7 +644,7 @@ endif
 " }}}
 
 " I'm tough guy
-noremap h <NOP>
+" noremap h <NOP>
 " noremap j <NOP>
 " noremap k <NOP>
-noremap l <NOP>
+" noremap l <NOP>
