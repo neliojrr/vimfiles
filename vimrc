@@ -1,54 +1,61 @@
 "  /===================================================\
-"  | Vimfiles by Salviano Ludgério                     |
-"  | - http://twitter.com/salvianoo                    |
-"  | Many tricks were stolen from Steve Losh dotfiles  |
-"  | - http://github.com/sjl/dotfiles                  |
+"  | Vimfiles by Nelio Carneiro                     |
+"  | - http://twitter.com/neliojrr                    |
+"  | Many tricks were stolen from Salviano Ludgerio  |
+"  | - http://github.com/salvianoo                  |
 "  \===================================================/
 
 " Preamble ----------------------------------------------------------------- {{{
 set nocompatible                " no legacy vi
 
 " Vundle setup
-filetype off
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+"filetype off
+"set rtp+=~/.vim/bundle/vundle
+"call vundle#rc()
 
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tomtom/tcomment_vim'
+call plug#begin('~/.vim/bundle')
 
-Bundle 'msanders/snipmate.vim'
-Bundle 'mattn/emmet-vim'
-Bundle 'othree/html5.vim'
-Bundle 'kchmck/vim-coffee-script'
+Plug 'othree/yajs.vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/oceanic-next'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'vim-airline/vim-airline'
+Plug 'vim-syntastic/syntastic'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/timl'
+Plug 'tomtom/tcomment_vim'
 
-Bundle 'Raimondi/delimitMate'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-ragtag'
+"Plug 'garbas/vim-snipmate'
+Plug 'mattn/emmet-vim'
+Plug 'othree/html5.vim'
 
-Bundle 'sjl/vitality.vim'
-Bundle 'sjl/tslime.vim'
-Bundle 'edkolev/tmuxline.vim'
-Bundle 'mileszs/ack.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-ragtag'
 
-Bundle 'int3/vim-extradite'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'slim-template/vim-slim.git'
-Bundle 'Go-Syntax'
+Plug 'sjl/vitality.vim'
+Plug 'sjl/tslime2.vim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'mileszs/ack.vim'
+
+Plug 'mxw/vim-jsx'
+Plug 'digitaltoad/vim-pug'
+Plug 'epilande/vim-react-snippets'
+Plug 'SirVer/ultisnips'
+
+call plug#end()
 
 " // Clojure specific bundles
 " Bundle 'guns/vim-clojure-static'
 " Bundle 'tpope/vim-fireplace'
 " Bundle 'tpope/vim-classpath'
 
-filetype plugin indent on     "required by Vundle
+" filetype plugin indent on     "required by Vundle
 
 "}}}
 " Basic Options ------------------------------------------------------------ {{{
@@ -62,7 +69,6 @@ set ruler                       " show the cursor position all
 set ttyfast
 set showcmd                     " show current mode down the bottom
 set autoindent                  " automatic indent new lines
-set smartindent                 " be smart about it
 set nofoldenable
 set shell=/bin/zsh
 set laststatus=2                " always show the status line
@@ -148,8 +154,9 @@ augroup END
 " }}}
 " Tabs, spaces, wrapping {{{
 
+filetype plugin indent on
 set shiftwidth=2
-set softtabstop=2               " yep, two
+set tabstop=2                   " yep, two
 set expandtab                   " use spaces, not tabs
 set nowrap                      " do not wrap lines
 set textwidth=80
@@ -212,9 +219,17 @@ nnoremap <localleader>= ==
 vnoremap - =
 
 " normal mode
-nnoremap <tab> %
+" nnoremap <tab> %
 " visual mode
-vnoremap <tab> %
+" vnoremap <tab> %
+
+" Using UtilSnips with tab
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" React syntax highlighting for .js
+let g:jsx_ext_required = 0
 
 " HTML tag closing
 inoremap <C-e> <Space><BS><Esc>:call InsertCloseTag()<cr>a
@@ -336,7 +351,7 @@ augroup ft_javascript
   au Filetype javascript setlocal foldmethod=marker
   au Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
 
-  au FileType javascript inoremap <buffer> {<cr> {}<left><cr><space><space><space><space>.<cr><esc>kA<bs>
+  au FileType javascript inoremap <buffer> {<cr> {}<left><cr><space><space>.<cr><esc>kA<bs>
 augroup END
 " }}}
 " Python {{{
@@ -346,7 +361,7 @@ augroup ft_python
   au FileType python setlocal define=^\s*\\(def\\\\|class\\)
   au FileType man nnoremap <buffer> <cr> :q<cr>
 
-  au Filetype python setlocal ts=4 sts=4 sw=4 expandtab
+  au Filetype python setlocal ts=2 sts=2 sw=2 expandtab
   au BufNewFile,BufRead *.py compiler nose
 augroup END
 "}}}
@@ -412,7 +427,7 @@ augroup END
 " }}}
 " C {{{
 augroup ft_c
-  au Filetype c setlocal ts=4 sts=4 sw=4 expandtab
+  au Filetype c setlocal ts=2 sts=2 sw=2 expandtab
   au Filetype c setlocal foldmethod=marker
   au Filetype c setlocal foldmarker={,}
 augroup END
@@ -424,7 +439,7 @@ augroup END
 " }}}
 " C++ {{{
 augroup ft_cpp
-  au Filetype cpp setlocal ts=4 sts=4 sw=4 expandtab
+  au Filetype cpp setlocal ts=2 sts=2 sw=2 expandtab
   au Filetype cpp setlocal foldmethod=marker
   au Filetype cpp setlocal foldmarker={,}
 augroup END
@@ -615,11 +630,21 @@ endfunction
 " }}}
 " Environments (GUI/Console) ----------------------------------------------- {{{
 
+" Theme
+syntax enable
+
+" for vim 8
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+
 if has('gui_running')
-  colorscheme solarized
+  "colorscheme solarized
+  colorscheme OceanicNext
   " Airline
   let g:airline_powerline_fonts = 1
-  let g:airline_theme = 'solarized'
+  "let g:airline_theme = 'solarized'
 
   " Remove all the UI cruft
   " go is same of guioptions
@@ -633,8 +658,9 @@ if has('gui_running')
   " set fullscreen
 
 else " console vim
-  colorscheme solarized
-  let g:airline_theme = 'solarized'
+  "colorscheme solarized
+  colorscheme OceanicNext
+  "let g:airline_theme = 'solarized'
   let g:tmuxline_powerline_separators = 0
 
   set mouse=a " mouse support
